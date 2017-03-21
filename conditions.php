@@ -39,8 +39,10 @@ $studypoints = 75;
 	
 	echo '<hr>';
 		
-	// nu det samme som switch statement:
-	// switches bruges egentlig kun til at tjekke simple overenstemmelser (fx er lige med), for lidt mere komplekse sammenligninger skal man derfor arbejde med return valuen true eller false ;-) 
+	/* Nu det samme som switch statement:
+	Switches bruges egentlig kun til at tjekke simple overenstemmelser (fx "... er lige med"), for lidt mere komplekse sammenligninger skal man derfor arbejde med return value'n true eller false ;-) 
+	Se mere om switch statement: http://php.net/manual/en/control-structures.switch.php
+	*/
 	
 	// if en "case" returnerer "true":
 	switch (true) {

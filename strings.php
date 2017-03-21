@@ -6,11 +6,8 @@ $myVar = 'Marc';
 $myVar2 = 3;
 // i PHP er \ den såkaldte escape-character
 $book = 'The Hitchhiker\'s Guide to the Galaxy';
-$author = 'Dan Brown';
 $book1 = "The Hitchhiker's Guide to the Galaxy";
-// som udgangspunkt brug kun "single quotes" i string formatering pga HTML konflikter
-echo '<h1 class="red">My Headline</h1>';
-
+$author = 'Dan Brown';
 
 ?>
 <!doctype html>
@@ -22,6 +19,8 @@ echo '<h1 class="red">My Headline</h1>';
 
 <body>
 <?php 
+	// som udgangspunkt brug kun "single quotes" i string formatering pga HTML konflikter
+echo '<h1 class="red">My Headline</h1>';
 	// at vise inhold af en variable
 	echo $myVar;
 	echo '<br>';

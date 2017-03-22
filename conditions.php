@@ -1,6 +1,3 @@
-<?php 
-$studypoints = 75;
-?>
 <!doctype html>
 <html>
 <head>
@@ -13,16 +10,21 @@ $studypoints = 75;
 </head>
 
 <body>
+<?php 
+	
+	$studypoints = 344;
+
+/*	
 <!-- Output afhængig af antallet af study points-->
 <!-- Når study points er under 80 skal der vises en rød tekst med advarsel: 'Kun [antallet af study points] er ikke nok! -->
 <!-- Når study points er lige med eller over 80 en grøn tekst: Super, du kan gå op til din eksamen-->
 <!-- Når study points er over 100: Du har formodentlig snydt -->
 <!-- NO INLINE STYLES PLEAAAASE !-->
-<?php 
+*/
 	// mindre end 80
 	if($studypoints<80){
 		echo '<p class="red">';
-		echo "Kun $studypoints study points er ikke nok!";
+		echo 'Kun '.$studypoints.' study points er ikke nok!';
 		echo '</p>';
 		// med && kan man sætte 2 eller flere betingelser, her inkluderer den ALLE tal mellem 80 og 100
 	} else if ($studypoints>=80 && $studypoints<=100){

@@ -1,19 +1,29 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>If betingelse og switch statement</title>
 <style type="text/css">
 	.red {color: red;}
 	.green {color: green;}
+body,td,th {
+	font-size: 16px;
+}
 </style>
 </head>
 
 <body>
+
+<form action="<?= $_SERVER['PHP_SELF']?>" method="get">
+	<input type="number" name="sp" min="0" max="150">
+	<input type="submit">
+</form>
+
 <?php 
 	
-	$studypoints = 344;
-
+	$studypoints = filter_input(INPUT_GET, 'sp', FILTER_VALIDATE_INT);
+	$studypoints = empty($studypoints) ? 0 : $studypoints;
+		
 /*	
 <!-- Output afhængig af antallet af study points-->
 <!-- Når study points er under 80 skal der vises en rød tekst med advarsel: 'Kun [antallet af study points] er ikke nok! -->

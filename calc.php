@@ -40,7 +40,6 @@
 	
 ?>
 
-
 <form action="<?=$_SERVER['PHP_SELF']?>" method="get">
 
 	<label for="a">A:</label>

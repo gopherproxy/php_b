@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Lommeregner med forbindelse til database</title>
+<title>Untitled Document</title>
 </head>
 
 <body>
@@ -17,15 +17,8 @@
 		return $num1-$num2;
 	}
 	
-	function mulNumbers ($num1, $num2){
-		return $num1*$num2;
-	}
 	
-	function divNumbers ($num1, $num2){
-		return $num1/$num2;
-	}	
-	
-	// opsamling af form data
+
 	$a = filter_input(INPUT_GET, 'a');
 	$b = filter_input(INPUT_GET, 'b');
 	$cmd = filter_input(INPUT_GET, 'cmd');
@@ -41,15 +34,8 @@
 		case 'Sub':
 			$res = subNumbers($a,$b);
 			break;
-		case 'Mul':
-			$res = mulNumbers($a,$b);
-			break;
-		case 'Div':
-			// runde op til 2 decimaler efter komma'en
-			$res = round(divNumbers($a,$b), 2);
-			break;
 		default:
-			$res = '...';
+			$res = 'Unknown cmd: '.$cmd;
 	}
 	
 ?>
@@ -65,7 +51,7 @@
 	<input type="submit" name="cmd" value="Sub">
 	<input type="submit" name="cmd" value="Mul">
 	<input type="submit" name="cmd" value="Div"><br>
-	Result: <?= $res ?>
+	Result: <?=$res?>
 </form>
 
 </body>

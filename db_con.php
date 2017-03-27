@@ -8,7 +8,7 @@ const MYSQLUSER = 'root'; // super bruger (remote har man særskilte database br
 const MYSQLPASS = 'root'; // bruger password
 const MYSQLDB = 'mul_b'; // database navn
 
-// 2. Oprette forbindelsen via mysqli objekt
+// 2. Oprette forbindelsen via mysqli objekt $con
 
 $con = new mysqli(HOSTNAME, MYSQLUSER, MYSQLPASS, MYSQLDB);
 

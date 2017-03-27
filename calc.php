@@ -9,6 +9,9 @@
 
 <?php
 	
+	// inkluderer alt indhold fra db_con filen
+	require_once('db_con.php');
+	
 	function addNumbers($num1, $num2){
 		return $num1+$num2;
 	}
@@ -51,6 +54,22 @@
 		default:
 			$res = '...';
 	}
+	
+	if($cmd){
+		// insertion via såkaldte "prepared statements"
+		
+		// prepare statement: Skriv NOGET (?) i spalten result indenfor tabellen calculations
+		$stmt = $con->prepare("INSERT INTO calculations (result) VALUES (?)");
+		// hvad er noget? Navn datatyp + indhold
+		$stmt->bind_param('d', $res);
+		// execute!
+		$stmt->execute();
+		echo 'New result added to databasse!';
+		// luk altid forbindelsen når du ikke har brug for den længere!!!!!!
+		$stmt->close();
+		$con->close();
+	}
+	
 	
 ?>
 

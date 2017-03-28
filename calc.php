@@ -28,10 +28,23 @@
 		return $num1/$num2;
 	}	
 	
-	// opsamling af form data
+	// opsamling af form data via input felter
+	/*
 	$a = filter_input(INPUT_GET, 'a');
 	$b = filter_input(INPUT_GET, 'b');
 	$cmd = filter_input(INPUT_GET, 'cmd');
+	*/
+	
+	// Input filter som array
+	$filters = array('a'=>FILTER_VALIDATE_INT, 'b'=>FILTER_VALIDATE_INT, 'cmd'=>FILTER_SANITIZE_STRING);
+	
+	// opsamlingen af input som array (get metoden)
+	$formArray = filter_input_array(INPUT_GET, $filters);
+	print_r($formArray);
+	
+	$a = $formArray['a'];
+	$b = $formArray['b'];
+	$cmd = $formArray['cmd'];
 	
 //	echo 'a='.$a.' b='.$b.' cmd='.$cmd;
 //	echo 'add:'.(addNumbers($a,$b)-subNumbers($a,$a));

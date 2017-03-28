@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Lommeregner med forbindelse til database</title>
+<style type="text/css">
+	table {border: 1px solid black; border-collapse: collapse;}
+</style>
 </head>
 
 <body>
@@ -71,19 +74,21 @@
 	if($cmd){
 		// insertion via såkaldte "prepared statements"
 		
-		// prepare statement: Skriv NOGET (?) i spalten result indenfor tabellen calculations
-		$stmt = $con->prepare("INSERT INTO calculations (result) VALUES (?)");
+		// prepare statement: Skriv NOGET (?) i kolonnerne a, b,  result indenfor tabellen calculations
+		$stmt = $con->prepare("INSERT INTO calculations (op, a, b, result) VALUES (?, ?, ?, ?)");
 		// hvad er noget? Navn datatyp + indhold
-		$stmt->bind_param('d', $res);
+		$stmt->bind_param('siid', $cmd, $a, $b, $res);
 		// execute!
 		$stmt->execute();
 		echo 'New result added to databasse!';
 		// luk altid forbindelsen når du ikke har brug for den længere!!!!!!
+		
 		$stmt->close();
+		
+		/*
 		$con->close();
-	}
-	
-	
+		*/
+	}	
 ?>
 
 <form action="<?=$_SERVER['PHP_SELF']?>" method="get">
@@ -99,6 +104,31 @@
 	<input type="submit" name="cmd" value="Div"><br>
 	Result: <?= $res ?>
 </form>
-
+<hr>
+<?php 
+	// SELECT statement
+	$stmt = $con->prepare("SELECT id, op, a, b, result FROM calculations");
+	// udfør SQL forespørgelse!
+	$stmt->execute();
+	// nu kan jeg binde værdierne fra kolonnerne til mine egne variabler:
+	$stmt->bind_result($id, $op, $a1, $b1, $result);
+	// for at få fat i ALLE records er jeg nødt til at gå på en løbetur - og bruge et loop!
+	// så længe du kan hente noget fra databasen ;-)
+	  
+	// Dynamisk genereret HTML layout:
+	// åbner en tabel
+	echo '<table border="1">';
+	echo '<tr><th>ID</th><th>Nummer 1</th><th>OP</th><th>Nummer 2</th><th>Result</th></tr>';
+	  while($stmt->fetch())  {
+		echo '<tr>';
+		echo "<td>$id</td>" . "<td>$a1</td>" . "<td>$op</td>" . "<td>$b1</td>". "<td>$result</td>";
+		echo '</tr>';
+	}
+	// slut på min tabel
+	echo '</table>';
+	
+	 
+	
+?>
 </body>
 </html>

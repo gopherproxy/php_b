@@ -43,7 +43,7 @@
 	
 	// opsamlingen af input som array (get metoden)
 	$formArray = filter_input_array(INPUT_GET, $filters);
-	print_r($formArray);
+	//print_r($formArray);
 	
 	$a = $formArray['a'];
 	$b = $formArray['b'];
@@ -76,15 +76,15 @@
 		
 		// prepare statement: Skriv NOGET (?) i kolonnerne a, b,  result indenfor tabellen calculations
 		$stmt = $con->prepare("INSERT INTO calculations (op, a, b, result) VALUES (?, ?, ?, ?)");
-		// hvad er noget? Navn datatyp + indhold
+		// hvad er "noget"? datatyp + variabler
+		// s=String, i=Integer, d=Double
 		$stmt->bind_param('siid', $cmd, $a, $b, $res);
 		// execute!
 		$stmt->execute();
 		echo 'New result added to databasse!';
-		// luk altid forbindelsen når du ikke har brug for den længere!!!!!!
-		
 		$stmt->close();
 		
+		// luk altid forbindelsen når du ikke har brug for den længere!!!!!!
 		/*
 		$con->close();
 		*/
@@ -108,27 +108,44 @@
 <?php 
 	// SELECT statement
 	$stmt = $con->prepare("SELECT id, op, a, b, result FROM calculations");
-	// udfør SQL forespørgelse!
+	// udfør SQL forespørgelse (SELECT)!
 	$stmt->execute();
 	// nu kan jeg binde værdierne fra kolonnerne til mine egne variabler:
 	$stmt->bind_result($id, $op, $a1, $b1, $result);
-	// for at få fat i ALLE records er jeg nødt til at gå på en løbetur - og bruge et loop!
-	// så længe du kan hente noget fra databasen ;-)
-	  
+	// for at få fat i ALLE records er jeg nødt til at gå på en løbetur - og bruge en løkke (loop)	
 	// Dynamisk genereret HTML layout:
-	// åbner en tabel
+	// start på min tabel
 	echo '<table border="1">';
 	echo '<tr><th>ID</th><th>Nummer 1</th><th>OP</th><th>Nummer 2</th><th>Result</th></tr>';
+	  // så længe du kan hente noget fra databasen ;-)
 	  while($stmt->fetch())  {
+		  // overskriver værdien af $op med den tilsvarende aritmetiske tegn til output i tabellen:
+		  switch($op)  {
+		case 'Add':
+			$op = '+';
+			break;
+		case 'Sub':
+			$op = '-';
+			break;
+		case 'Mul':
+			$op = '*';
+			break;
+		case 'Div':
+			$op = '/';
+			break;
+		default:
+			$op = '';
+	}
 		echo '<tr>';
-		echo "<td>$id</td>" . "<td>$a1</td>" . "<td>$op</td>" . "<td>$b1</td>". "<td>$result</td>";
+		echo "<td>$id</td>" . "<td>$a1</td>" . "<td>$op</td>" . "<td>$b1</td>" . "<td>$result</td>";
 		echo '</tr>';
 	}
 	// slut på min tabel
 	echo '</table>';
-	
-	 
-	
+	 // statement ($stmt) afsluttet)
+	$stmt->close();
+	// luk altid forbindelsen når du ikke har brug for den længere!
+	$con->close();
 ?>
 </body>
 </html>

@@ -137,8 +137,11 @@
 			$op = '';
 	}
 		echo '<tr>';
-		echo "<td>$id</td>" . "<td>$a1</td>" . "<td>$op</td>" . "<td>$b1</td>" . "<td>$result</td>";
-		echo '</tr>';
+//		echo "<td>$id</td>" . "<td>$a1</td>" . "<td>$op</td>" . "<td>$b1</td>" . "<td>$result</td>";
+//		echo '<td>'.$id.'</td><td>'.$a1.'</td><td>'.$op.'</td><td>'.$b1.'</td><td>'.$result.'</td>';
+		echo "<td>$id</td><td>$a1</td><td>$op</td><td>$b1</td><td>$result</td>";
+
+		  echo '</tr>';
 	}
 	// slut på min tabel
 	echo '</table>';

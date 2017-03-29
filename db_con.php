@@ -21,7 +21,7 @@ $con->set_charset('utf8');
 if($con->connect_error){
 	die($con->connect_error);
 }else {
-	echo '<h2>Juhu - jeg kan se databassen!</h2>';
+	echo '<h2>Juhu - jeg kan se databassen!</h2>'; // flot Marc :-)
 }
 
 
